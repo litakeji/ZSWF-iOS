@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
+#import <YTKNetwork.h>
+#import "UIColor+YMHex.h"
+#import "LTWKPageVC.h"
+#import "LTBaseNavigationController.h"
 @interface AppDelegate ()
 
 @end
@@ -16,9 +19,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    YTKNetworkConfig *config = [YTKNetworkConfig sharedConfig];
+    config.baseUrl = @"https://api.huanggao.net/v1/";
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    LTBaseNavigationController *mainVC = [[LTBaseNavigationController alloc] initWithRootViewController:[LTWKPageVC new]];
+    
+    self.window.rootViewController = mainVC;
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
